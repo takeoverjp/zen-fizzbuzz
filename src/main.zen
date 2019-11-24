@@ -1,5 +1,50 @@
 const std = @import("std");
+const ok = std.testing.ok;
+
+fn isFizz(i: u32) bool {
+    return i % 3 == 0;
+}
+
+test "isFizz returns true" {
+    ok(isFizz(3));
+    ok(isFizz(6));
+}
+
+test "isFizz returns false" {
+    ok(!isFizz(1));
+    ok(!isFizz(5));
+}
+
+fn isBuzz(i: u32) bool {
+    return i % 5 == 0;
+}
+
+test "isBuzz returns true" {
+    ok(isBuzz(5));
+    ok(isBuzz(10));
+}
+
+test "isBuzz returns false" {
+    ok(!isBuzz(1));
+    ok(!isBuzz(3));
+}
+
+fn fizzbuzz() void {
+    var i: u32 = 1;
+    while (i <= 100) {
+        if (isFizz(i) and isBuzz(i)) {
+            std.debug.warn("FizzBuzz\n");
+        } else if (isFizz(i)) {
+            std.debug.warn("Fizz\n");
+        } else if (isBuzz(i)) {
+            std.debug.warn("Buzz\n");
+        } else {
+            std.debug.warn("{}\n", i);
+        }
+        i += 1;
+    }
+}
 
 pub fn main() anyerror!void {
-    std.debug.warn("Congratulations on your first step to writing perfect software in Zen.\n");
+    fizzbuzz();
 }
